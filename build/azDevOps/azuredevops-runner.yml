@@ -13,7 +13,8 @@ trigger:
 
 variables:
   - template: azuredevops-vars.yml
-
+  - name: DOCKER_PASSWORD
+    value: $(DOCKER_PASSWORD)
 # Configure the stages
 stages:
 
