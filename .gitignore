@@ -1,0 +1,4 @@
+support/*
+envfile
+local/*
+outputs/**/*.pdf
