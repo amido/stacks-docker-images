@@ -13,8 +13,6 @@ trigger:
 
 variables:
   - template: azuredevops-vars.yml
-  - name: DOCKER_PASSWORD
-    value: $(DOCKER_PASSWORD)
 # Configure the stages
 stages:
 
@@ -42,6 +40,8 @@ stages:
             targetType: inline
             script: |
               taskctl build
+            env:
+              DOCKER_PASSWORD: $(DOCKER_PASSWORD)
           ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
             env: 
               PUBLISH_RELEASE: $true
