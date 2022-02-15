@@ -11,8 +11,7 @@ tasks:
     context: powershell-dotnet
     description: Update the build number
     command:
-      - Update-BuildNumber -BuildNumber 0.2.2-direct 
-      # {{ . BUILD_NUMBER }}
+      - Update-BuildNumber -BuildNumber {{ . BUILD_NUMBER }}
     # Set variable BUILD_NUMBER; i.e. 0.2.1
 
   update:dashboard:
@@ -23,3 +22,9 @@ tasks:
     # TODO: Currently handled by ADO pipeline var, captured in Story 4122
     # env: 
     #  PUBLISH_RELEASE: $true
+
+  debug:
+    context: powershell-dotnet
+    description: debugs env vars
+    command:
+      - Get-ChildItem env:/

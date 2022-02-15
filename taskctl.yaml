@@ -5,11 +5,13 @@ import:
 pipelines:
 
   setup:
+  - task: debug
   - task: build:number
     variables:
-      BUILD_NUMBER: '0.2.1-testing'
+      BUILD_NUMBER: '0.2.3-testing'
 
   build:base:
+  - task: debug
   - task: build:container
     variables:
       IMAGE_NAME: williamamido/runner-pwsh
@@ -28,6 +30,7 @@ pipelines:
       DOCKERFILE: ./image_definitions/java
 
   publish: 
+  - task: debug  
   - task: update:dashboard
 
   build:
