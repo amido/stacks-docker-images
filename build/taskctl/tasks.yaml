@@ -16,7 +16,7 @@ tasks:
       BUILDNUMBER: $DOCKER_IMAGE_TAG
 
   update:dashboard:
-    context: powershell
+    context: powershell-dotnet
     description: Update the Deployment Dashboard
     command:
       - Update-InfluxDashboard
