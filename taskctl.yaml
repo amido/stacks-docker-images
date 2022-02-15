@@ -1,0 +1,22 @@
+import:
+- ./build/taskctl/contexts.yml
+- ./build/taskctl/tasks.yml
+
+pipelines:
+  # Build a pwsh image
+  build:
+    - task: build:number
+    - task: build:container
+      variables:
+        IMAGE_NAME: williamamido/runner-pwsh
+        DOCKERFILE: ./image_definitions/base
+    # - task: build:container
+    #   depends_on:
+    #     -  build:container
+    #   variables:
+    #     IMAGE_NAME: williamamido/runner-pwsh-dotnet
+    #     DOCKERFILE: ./image_definitions/dotnet
+    # - task: build:container
+    #   variables:
+    #     IMAGE_NAME: williamamido/runner-pwsh
+    #     DOCKERFILE: ./image_definitions/base

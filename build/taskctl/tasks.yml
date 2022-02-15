@@ -1,0 +1,16 @@
+  # Compilation tasks
+tasks:
+  build:container:
+    context: powershell-dotnet
+    description: Create container image for application
+    command:
+      - Build-DockerImage -Name {{ .IMAGE_NAME }} -buildargs {{ .DOCKERFILE }} -push -generic
+    # Set variable IMAGE_NAME; i.e. stacks-api
+
+  build:number:
+    context: powershell-dotnet
+    description: Update the build number
+    command:
+      - Update-BuildNumber -BuildNumber $BUILDNUMBER
+    env:
+      BUILDNUMBER: $DOCKER_IMAGE_TAG
