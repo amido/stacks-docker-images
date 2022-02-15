@@ -36,7 +36,7 @@ contexts:
         - PSModulePath=/modules
         - -w
         - /app
-        - williamamido/runner-pwsh:0.0.3-untested
+        - williamamido/runner-pwsh:0.3.19-pipelines
         - pwsh
         - -NoProfile
         - -Command
@@ -92,7 +92,7 @@ contexts:
         - /app
         - --env-file
         - envfile
-        - williamamido/runner-pwsh-dotnet:0.2.0-local
+        - williamamido/runner-pwsh-dotnet:0.2.5-local
         - pwsh
         - -NoProfile
         - -Command
