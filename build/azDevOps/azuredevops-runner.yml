@@ -11,11 +11,6 @@ trigger:
     include:
       - '*'
 
-#  resources:
-  # containers:
-  #   - container: runner_container
-  #     image: williamamido/runner-pwsh-dotnet
-
 variables:
   - template: azuredevops-vars.yml
 
@@ -41,26 +36,26 @@ stages:
 
         # Run the task to generate the PowerShell module files
         - task: Bash@3
-          displayName: Generate PowerShell Module
+          displayName: Bulid Images
           inputs:
             targetType: inline
             script: |
               taskctl build
 
-        # Generate the documentation
-        - task: Bash@3
-          displayName: Generate Documentation
-          inputs:
-            targetType: inline
-            script: |
-              taskctl docs
+        # # Generate the documentation
+        # - task: Bash@3
+        #   displayName: Generate Documentation
+        #   inputs:
+        #     targetType: inline
+        #     script: |
+        #       taskctl docs
 
-        # Upload the documentation
-        - task: PublishBuildArtifacts@1
-          displayName: Publish Documentation
-          inputs:
-            pathToPublish: $(Build.SourcesDirectory)/outputs/docs
-            artifactName: docs
+        # # Upload the documentation
+        # - task: PublishBuildArtifacts@1
+        #   displayName: Publish Documentation
+        #   inputs:
+        #     pathToPublish: $(Build.SourcesDirectory)/outputs/docs
+        #     artifactName: docs
 
   - stage: Release
 

@@ -1,22 +1,40 @@
 import:
-- ./build/taskctl/contexts.yml
-- ./build/taskctl/tasks.yml
+- ./build/taskctl/contexts.yaml
+- ./build/taskctl/tasks.yaml
 
 pipelines:
-  # Build a pwsh image
+
+  setup:
+  - task: build:number
+
+  build:base:
+  - task: build:container
+    variables:
+      IMAGE_NAME: williamamido/runner-pwsh
+      DOCKERFILE: ./image_definitions/base
+
+  build:dotnet:
+  - task: build:container
+    variables:
+      IMAGE_NAME: williamamido/runner-pwsh-dotnet
+      DOCKERFILE: ./image_definitions/dotnet
+
+  build:java:
+  - task: build:container
+    variables:
+      IMAGE_NAME: williamamido/runner-pwsh-java
+      DOCKERFILE: ./image_definitions/java
+
+  publish: 
+  - task: update:dashboard
+
   build:
-    - task: build:number
-    - task: build:container
-      variables:
-        IMAGE_NAME: williamamido/runner-pwsh
-        DOCKERFILE: ./image_definitions/base
-    # - task: build:container
-    #   depends_on:
-    #     -  build:container
-    #   variables:
-    #     IMAGE_NAME: williamamido/runner-pwsh-dotnet
-    #     DOCKERFILE: ./image_definitions/dotnet
-    # - task: build:container
-    #   variables:
-    #     IMAGE_NAME: williamamido/runner-pwsh
-    #     DOCKERFILE: ./image_definitions/base
+    - pipeline: setup
+    - pipeline: build:base
+      depends_on: [setup]
+    - pipeline: build:dotnet
+      depends_on: [setup,build:base]
+    - pipeline: build:java
+      depends_on: [setup,build:base]
+    - pipeline: publish
+      depends_on: [setup,build:base,build:java,build:dotnet]

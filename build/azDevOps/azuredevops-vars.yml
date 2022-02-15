@@ -24,11 +24,11 @@ variables:
       # DOCKER_PASSWORD
       # DOCKER_USERNAME
 
-  # AmidoBuild Module to integrate in base image
+  # AmidoBuild Module to integrate in Docker image
   - name: AmidoBuild
     value: v0.0.47
 
-# Dashboard
+# Dashboard Publishing
   - name: DASHBOARD_VERSION
     value: $(Build.BuildNumber)
   - name: DASHBOARD_TAGS
