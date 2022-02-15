@@ -6,7 +6,6 @@ pipelines:
 
   setup:
   - task: build:number
-    depends_on: [debug]
 
   build:base:
   - task: build:container
