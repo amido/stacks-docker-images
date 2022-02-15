@@ -11,7 +11,7 @@ tasks:
     context: powershell-dotnet
     description: Update the build number
     command:
-      - Update-BuildNumber -BuildNumber {{ . BUILD_NUMBER }}
+      - Update-BuildNumber -BuildNumber {{ .BUILD_NUMBER }}
     # Set variable BUILD_NUMBER; i.e. 0.2.1
 
   update:dashboard:
