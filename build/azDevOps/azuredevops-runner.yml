@@ -1,0 +1,100 @@
+name: "$(Build.SourceBranchName)-init"
+
+pr:
+  - master
+
+trigger:
+  branches:
+    include:
+      - 'main'
+  paths:
+    include:
+      - '*'
+
+#  resources:
+  # containers:
+  #   - container: runner_container
+  #     image: williamamido/runner-pwsh-dotnet
+
+variables:
+  - template: azuredevops-vars.yml
+
+# Configure the stages
+stages:
+
+  - stage: Build
+
+    jobs:
+
+    - job: UnitTests
+
+      steps:
+
+        # Install Taskctl for the build to run
+        - task: Bash@3
+          displayName: Install Taskctl
+          inputs:
+            targetType: inline
+            script: |
+              wget https://github.com/taskctl/taskctl/releases/download/${{ variables.TaskctlVersion }}/taskctl_${{ variables.TaskctlVersion }}_linux_amd64.tar.gz -O /tmp/taskctl.tar.gz
+              tar zxf /tmp/taskctl.tar.gz -C /usr/local/bin taskctl 
+
+        # Run the task to generate the PowerShell module files
+        - task: Bash@3
+          displayName: Generate PowerShell Module
+          inputs:
+            targetType: inline
+            script: |
+              taskctl build
+
+        # Generate the documentation
+        - task: Bash@3
+          displayName: Generate Documentation
+          inputs:
+            targetType: inline
+            script: |
+              taskctl docs
+
+        # Upload the documentation
+        - task: PublishBuildArtifacts@1
+          displayName: Publish Documentation
+          inputs:
+            pathToPublish: $(Build.SourcesDirectory)/outputs/docs
+            artifactName: docs
+
+  - stage: Release
+
+    jobs:
+    
+    - job: Publish
+      steps:
+        - checkout: self # Local use of Powershell Modules
+
+        # Download the necessary artifacts from the previous stage
+        # - documentation
+        # - task: DownloadPipelineArtifact@2
+        #   inputs:
+        #     artifact: 'docs'
+        #     patterns: '**/*.pdf'
+        #     path: $(Build.SourcesDirectory)/artifacts/docs
+
+
+        # Install Taskctl for the build to run
+        - task: Bash@3
+          displayName: Install Taskctl
+          inputs:
+            targetType: inline
+            script: |
+              wget https://github.com/taskctl/taskctl/releases/download/${{ variables.TaskctlVersion }}/taskctl_${{ variables.TaskctlVersion }}_linux_amd64.tar.gz -O /tmp/taskctl.tar.gz
+              tar zxf /tmp/taskctl.tar.gz -C /usr/local/bin taskctl 
+
+        # Publish to GitHub and Build Dashboard
+        - task: Bash@3
+          displayName: Publish Release
+          inputs:
+            targetType: inline
+            script: |
+              taskctl release
+          ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
+            env: 
+              PUBLISH_RELEASE: $true
