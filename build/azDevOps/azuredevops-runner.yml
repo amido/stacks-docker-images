@@ -40,10 +40,10 @@ stages:
             targetType: inline
             script: |
               taskctl build
-            env:
-              # ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
+          env:
+            ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
               PUBLISH_RELEASE: $true
-              DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
         # # Generate the documentation
         # - task: Bash@3
