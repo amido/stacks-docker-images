@@ -42,9 +42,8 @@ stages:
               taskctl build
             env:
               DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-          ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
-            env: 
-              PUBLISH_RELEASE: $true
+              ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
+                PUBLISH_RELEASE: $true
         # # Generate the documentation
         # - task: Bash@3
         #   displayName: Generate Documentation
