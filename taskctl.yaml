@@ -8,7 +8,6 @@ pipelines:
   - task: build:number
 
   build:base:
-  - task: debug
   - task: build:container
     variables:
       IMAGE_NAME: williamamido/runner-pwsh
@@ -26,7 +25,7 @@ pipelines:
       IMAGE_NAME: williamamido/runner-pwsh-java
       DOCKERFILE: ./image_definitions/java
 
-  publish: 
+  publish:
   - task: update:dashboard
 
   build:
@@ -36,6 +35,6 @@ pipelines:
     - pipeline: build:dotnet
       depends_on: [build:base]
     - pipeline: build:java
-      depends_on: [build:base]
+      depends_on: [build:dotnet]
     - pipeline: publish
       depends_on: [build:base,build:java,build:dotnet]

@@ -13,6 +13,8 @@ trigger:
 
 variables:
   - template: azuredevops-vars.yml
+  - name: DebugPreference
+    value: "Continue"
 # Configure the stages
 stages:
 
