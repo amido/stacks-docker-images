@@ -88,6 +88,8 @@ contexts:
         - /var/run/docker.sock:/var/run/docker.sock
         - -e
         - PSModulePath=/modules
+        - -e
+        - DebugPreference="Continue"
         - -w
         - /app
         - --env-file
