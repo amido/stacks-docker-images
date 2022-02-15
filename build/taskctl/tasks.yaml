@@ -11,9 +11,9 @@ tasks:
     context: powershell-dotnet
     description: Update the build number
     command:
-      - Update-BuildNumber -BuildNumber $BUILDNUMBER
-    env:
-      BUILDNUMBER: $DOCKER_IMAGE_TAG
+      - Update-BuildNumber -BuildNumber 0.2.2-direct 
+      # {{ . BUILD_NUMBER }}
+    # Set variable BUILD_NUMBER; i.e. 0.2.1
 
   update:dashboard:
     context: powershell-dotnet

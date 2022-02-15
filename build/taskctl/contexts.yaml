@@ -20,32 +20,13 @@ contexts:
         - -Command
     quote: "'"
 
-  powershell-test:
-    executable:
-      bin: docker
-      args:
-        - run
-        - --rm
-        - -v
-        - ${PWD}:/app
-        - -v
-        - /var/run/docker.sock:/var/run/docker.sock
-        - -e
-        - PSModulePath=/modules
-        - -w
-        - /app
-        - williamamido/runner-pwsh:0.0.3-untested
-        - pwsh
-        - -NoProfile
-        - -Command
-    quote: "'"
-
   powershell:
     executable:
       bin: docker
       args:
         - run
-        - --env-file envfile
+        - --env-file
+        - envfile
         - --rm
         - -v
         - ${PWD}:/app
