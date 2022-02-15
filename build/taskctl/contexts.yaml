@@ -34,7 +34,7 @@ contexts:
         - PSModulePath=/modules
         - -w
         - /app
-        - williamamido/runner-pwsh:latest
+        - williamamido/runner-pwsh
         - pwsh
         - -NoProfile
         - -Command
@@ -55,7 +55,7 @@ contexts:
         - PSModulePath=/modules
         - -w
         - /app
-        - williamamido/runner-pwsh:latest
+        - williamamido/runner-pwsh
         - pwsh
         - -NoProfile
         - -Command
@@ -76,7 +76,7 @@ contexts:
         - PSModulePath=/modules
         - -w
         - /app
-        - williamamido/runner-pwsh-dotnet:latest
+        - williamamido/runner-pwsh-dotnet
         - pwsh
         - -NoProfile
         - -Command
@@ -132,7 +132,7 @@ contexts:
         - /app
         - --env-file
         - envfile
-        - williamamido/runner-pwsh-dotnet:latest
+        - williamamido/runner-pwsh-dotnet
         - pwsh
         - -NoProfile
         - -Command
