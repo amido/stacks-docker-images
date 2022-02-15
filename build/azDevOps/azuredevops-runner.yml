@@ -21,7 +21,7 @@ stages:
 
     jobs:
 
-    - job: UnitTests
+    - job: Build
 
       steps:
 
@@ -36,7 +36,7 @@ stages:
 
         # Run the task to generate the PowerShell module files
         - task: Bash@3
-          displayName: Bulid Images
+          displayName: Build Images
           inputs:
             targetType: inline
             script: |
