@@ -8,12 +8,14 @@ pipelines:
   - task: build:number
 
   build:base:
+  - task: debug
   - task: build:container
     variables:
       IMAGE_NAME: williamamido/runner-pwsh
       DOCKERFILE: ./image_definitions/base
 
   build:dotnet:
+  - task: debug
   - task: build:container
     variables:
       IMAGE_NAME: williamamido/runner-pwsh-dotnet
