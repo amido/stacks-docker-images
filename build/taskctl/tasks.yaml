@@ -14,3 +14,12 @@ tasks:
       - Update-BuildNumber -BuildNumber $BUILDNUMBER
     env:
       BUILDNUMBER: $DOCKER_IMAGE_TAG
+
+  update:dashboard:
+    context: powershell
+    description: Update the Deployment Dashboard
+    command:
+      - Update-InfluxDashboard
+    # TODO: Currently handled by ADO pipeline var, captured in Story 4122
+    # env: 
+    #  PUBLISH_RELEASE: $true
