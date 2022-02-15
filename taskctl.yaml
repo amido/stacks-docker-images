@@ -5,11 +5,8 @@ import:
 pipelines:
 
   setup:
-  - task: debug
   - task: build:number
     depends_on: [debug]
-    variables:
-      BUILD_NUMBER: $VERSION_SEMVER
 
   build:base:
   - task: build:container
