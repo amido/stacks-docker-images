@@ -20,7 +20,7 @@ contexts:
         - -Command
     quote: "'"
 
-  powershell_test:
+  powershell-test:
     executable:
       bin: docker
       args:
@@ -34,7 +34,7 @@ contexts:
         - PSModulePath=/modules
         - -w
         - /app
-        - williamamido/runner-pwsh
+        - williamamido/runner-pwsh:0.0.3-untested
         - pwsh
         - -NoProfile
         - -Command
@@ -55,33 +55,12 @@ contexts:
         - PSModulePath=/modules
         - -w
         - /app
-        - williamamido/runner-pwsh
+        - williamamido/runner-pwsh:0.0.3-untested
         - pwsh
         - -NoProfile
         - -Command
     quote: "'"
     before: env | grep -v PATH > envfile
-
-  dotnet:
-    executable:
-      bin: docker
-      args:
-        - run
-        - --rm
-        - -v
-        - ${PWD}:/app
-        - -v
-        - /var/run/docker.sock:/var/run/docker.sock
-        - -e
-        - PSModulePath=/modules
-        - -w
-        - /app
-        - williamamido/runner-pwsh-dotnet
-        - pwsh
-        - -NoProfile
-        - -Command
-    quote: "'"    
-
 # stacks cli
 
   buildenv:
@@ -132,7 +111,7 @@ contexts:
         - /app
         - --env-file
         - envfile
-        - williamamido/runner-pwsh-dotnet
+        - williamamido/runner-pwsh-dotnet:0.2.0-local
         - pwsh
         - -NoProfile
         - -Command
