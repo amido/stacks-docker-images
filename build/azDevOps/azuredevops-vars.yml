@@ -2,6 +2,12 @@
 # by the build
 variables:
 
+  # Dependency versions
+  - name: TaskctlVersion
+    value: 1.4.2
+  - name: AmidoBuild
+    value: v0.0.47
+  
   # DEFAULT IMAGE RUNNER
   - name: pool_vm_image
     value: ubuntu-20.04
@@ -23,10 +29,6 @@ variables:
     # Group should contain: 
       # DOCKER_PASSWORD
       # DOCKER_USERNAME
-
-  # AmidoBuild Module to integrate in Docker image
-  - name: AmidoBuild
-    value: v0.0.47
 
 # Dashboard Publishing
   - name: DASHBOARD_VERSION
