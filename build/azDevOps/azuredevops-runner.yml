@@ -46,6 +46,7 @@ stages:
             ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
               PUBLISH_RELEASE: $true
             DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+            DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN)
 
         # # Generate the documentation
         # - task: Bash@3
