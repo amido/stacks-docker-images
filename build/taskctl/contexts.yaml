@@ -34,6 +34,8 @@ contexts:
         - /var/run/docker.sock:/var/run/docker.sock
         - -e
         - PSModulePath=/modules
+        - -e
+        - DebugPreference="Continue"
         - -w
         - /app
         - williamamido/runner-pwsh:0.3.19-pipelines
@@ -88,8 +90,6 @@ contexts:
         - /var/run/docker.sock:/var/run/docker.sock
         - -e
         - PSModulePath=/modules
-        - -e
-        - DebugPreference="Continue"
         - -w
         - /app
         - --env-file
@@ -99,8 +99,6 @@ contexts:
         - -NoProfile
         - -Command
     quote: "'"
-    env:
-      arguments: "-v q /p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
     before: env | grep -v PATH > envfile  # added WA 10/02/22
 
   powershell-python:
