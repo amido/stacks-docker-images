@@ -70,7 +70,7 @@ stages:
             DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
         - task: Bash@3
-          displayName: Build Java
+          displayName: Publish to Dashboard
           inputs:
             targetType: inline
             script: |
