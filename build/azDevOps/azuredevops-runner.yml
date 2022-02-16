@@ -49,10 +49,7 @@ stages:
             script: |
               taskctl build:base
           env:
-            ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
-              PUBLISH_RELEASE: $true
             DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-            DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN)
 
         - task: Bash@3
           displayName: Build DotNet
@@ -61,10 +58,7 @@ stages:
             script: |
               taskctl build:dotnet
           env:
-            ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
-              PUBLISH_RELEASE: $true
             DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-            DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN)
 
         - task: Bash@3
           displayName: Build Java
@@ -73,9 +67,17 @@ stages:
             script: |
               taskctl build:base
           env:
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+
+        - task: Bash@3
+          displayName: Build Java
+          inputs:
+            targetType: inline
+            script: |
+              taskctl publish
+          env:
             ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
               PUBLISH_RELEASE: $true
-            DOCKER_PASSWORD: $(DOCKER_PASSWORD)
             DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN)
         # # Generate the documentation
         # - task: Bash@3

@@ -8,17 +8,13 @@ pipelines:
   - task: build:number
 
   build:base:
-  - task: debug
   - task: build:container
-    depends_on: [debug]
     variables:
       IMAGE_NAME: williamamido/runner-pwsh
       DOCKERFILE: ./image_definitions/base
 
   build:dotnet:
-  - task: debug
   - task: build:container
-    depends_on: [debug]
     variables:
       IMAGE_NAME: williamamido/runner-pwsh-dotnet
       DOCKERFILE: ./image_definitions/dotnet
@@ -31,14 +27,3 @@ pipelines:
 
   publish:
   - task: update:dashboard
-
-  build:
-    - pipeline: setup
-    - pipeline: build:base
-      depends_on: [setup]
-    - pipeline: build:dotnet
-      depends_on: [setup,build:base]
-    # - pipeline: build:java
-    #   depends_on: [build:dotnet]
-    # - pipeline: publish
-    #   depends_on: [build:base,build:java,build:dotnet]
