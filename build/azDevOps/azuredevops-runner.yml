@@ -49,7 +49,7 @@ stages:
             script: |
               taskctl build:base
           env:
-            DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD) # requires explicit mapping to be used as an env var
 
         - task: Bash@3
           displayName: Build DotNet
@@ -58,7 +58,7 @@ stages:
             script: |
               taskctl build:dotnet
           env:
-            DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD) # requires explicit mapping to be used as an env var
 
         - task: Bash@3
           displayName: Build Java
@@ -67,7 +67,7 @@ stages:
             script: |
               taskctl build:java
           env:
-            DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD) # requires explicit mapping to be used as an env var
 
         - task: Bash@3
           displayName: Publish to Dashboard
@@ -78,7 +78,7 @@ stages:
           env:
             ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
               PUBLISH_RELEASE: $true
-            DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN)
+            DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN) # requires explicit mapping to be used as an env var
         # # Generate the documentation
         # - task: Bash@3
         #   displayName: Generate Documentation
