@@ -65,7 +65,7 @@ stages:
           inputs:
             targetType: inline
             script: |
-              taskctl build:base
+              taskctl build:java
           env:
             DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
