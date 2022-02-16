@@ -27,3 +27,14 @@ pipelines:
 
   publish:
   - task: update:dashboard
+
+  all: # Simulating a full run of the CI/CD tool.
+  - pipeline: setup
+  - pipeline: build:base
+    depends_on: [setup]
+  - pipeline: build:dotnet
+    depends_on: [build:base]
+  - pipeline: build:java
+    depends_on: [build:base]
+  - pipeline: publish
+    depends_on: [build:base, build:dotnet, build:java]
