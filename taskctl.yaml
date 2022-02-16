@@ -34,10 +34,10 @@ pipelines:
 
   build:
     - pipeline: setup
-    # - pipeline: build:base
-    #   depends_on: [setup]
+    - pipeline: build:base
+      depends_on: [setup]
     - pipeline: build:dotnet
-      depends_on: [setup] # [build:base]
+      depends_on: [setup,build:base]
     # - pipeline: build:java
     #   depends_on: [build:dotnet]
     # - pipeline: publish

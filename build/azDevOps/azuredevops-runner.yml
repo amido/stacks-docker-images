@@ -35,19 +35,48 @@ stages:
               wget https://github.com/taskctl/taskctl/releases/download/${{ variables.TaskctlVersion }}/taskctl_${{ variables.TaskctlVersion }}_linux_amd64.tar.gz -O /tmp/taskctl.tar.gz
               tar zxf /tmp/taskctl.tar.gz -C /usr/local/bin taskctl 
 
-        # Run the task to generate the PowerShell module files
         - task: Bash@3
-          displayName: Build Images
+          displayName: Setup
           inputs:
             targetType: inline
             script: |
-              taskctl build
+              taskctl setup
+
+        - task: Bash@3
+          displayName: Build Base
+          inputs:
+            targetType: inline
+            script: |
+              taskctl build:base
           env:
             ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
               PUBLISH_RELEASE: $true
             DOCKER_PASSWORD: $(DOCKER_PASSWORD)
             DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN)
 
+        - task: Bash@3
+          displayName: Build DotNet
+          inputs:
+            targetType: inline
+            script: |
+              taskctl build:dotnet
+          env:
+            ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
+              PUBLISH_RELEASE: $true
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+            DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN)
+
+        - task: Bash@3
+          displayName: Build Java
+          inputs:
+            targetType: inline
+            script: |
+              taskctl build:base
+          env:
+            ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: # On main branch runs
+              PUBLISH_RELEASE: $true
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+            DASHBOARD_INFLUX_TOKEN: $(DASHBOARD_INFLUX_TOKEN)
         # # Generate the documentation
         # - task: Bash@3
         #   displayName: Generate Documentation
