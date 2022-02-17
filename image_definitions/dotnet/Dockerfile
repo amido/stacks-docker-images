@@ -1,7 +1,7 @@
 # This image builds on the base image and installs .NET SDK
 # for building applications
 
-FROM williamamido/runner-pwsh
+FROM amidodevelopment/runner-pwsh
 
 ARG SONARSCANNER_VERSION=5.3.2
 ARG REPORTGENERATOR_VERSION=5.0.0
