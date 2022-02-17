@@ -10,19 +10,19 @@ pipelines:
   build:base:
   - task: build:container
     variables:
-      IMAGE_NAME: amido/runner-pwsh
+      IMAGE_NAME: williamamido/runner-pwsh
       DOCKERFILE: ./image_definitions/base
 
   build:dotnet:
   - task: build:container
     variables:
-      IMAGE_NAME: amido/runner-pwsh-dotnet
+      IMAGE_NAME: williamamido/runner-pwsh-dotnet
       DOCKERFILE: ./image_definitions/dotnet
 
   build:java:
   - task: build:container
     variables:
-      IMAGE_NAME: amido/runner-pwsh-java
+      IMAGE_NAME: williamamido/runner-pwsh-java
       DOCKERFILE: ./image_definitions/java
 
   publish:
