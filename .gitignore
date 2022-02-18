@@ -1,4 +1,5 @@
-support/*
+local
+outputs
+support
 envfile
-local/*
-outputs/**/*.pdf
+.DS_Store
