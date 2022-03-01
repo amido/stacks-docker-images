@@ -9,7 +9,7 @@ ARG MAVEN_VERSION=3.8.4
 RUN curl "https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.zip" -o /tmp/maven.zip && \
     unzip /tmp/maven.zip -d /usr/local && \
     rm /tmp/maven.zip \
-    \
+
 
 RUN apt-get update && apt-get install -y gnupg gnupg-agent
 
