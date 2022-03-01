@@ -37,7 +37,6 @@ pipelines:
       IMAGE_NAME: amidostacks/runner-pwsh-golang
       DOCKERFILE: ./image_definitions/golang
 
-
   publish:
   - task: update:dashboard
 

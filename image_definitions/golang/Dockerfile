@@ -16,4 +16,3 @@ RUN apt-get update && \
     curl -L "https://github.com/PowerShell/PowerShell/releases/download/v${POWERSHELL_VERSION}/powershell-lts_${POWERSHELL_VERSION}-1.deb_amd64.deb" -o /tmp/powershell.deb && \
     dpkg -i /tmp/powershell.deb && \
     rm /tmp/powershell.deb 
-
