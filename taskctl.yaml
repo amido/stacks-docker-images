@@ -31,6 +31,12 @@ pipelines:
       IMAGE_NAME: amidostacks/runner-pwsh-pester
       DOCKERFILE: ./image_definitions/pester
 
+  build:java-sign:
+    - task: build:container
+      variables:
+        IMAGE_NAME: amidostacks/runner-java-sign
+        DOCKERFILE: ./image_definitions/java-sign
+
   publish:
   - task: update:dashboard
 
@@ -44,5 +50,7 @@ pipelines:
     depends_on: [build:base]
   - pipeline: build:pester
     depends_on: [build:base]
+  - pipeline: build:java-sign
+    depends_on: [build:base]
   - pipeline: publish
-    depends_on: [build:base, build:dotnet, build:java, build:pester]
+    depends_on: [build:base, build:dotnet, build:java, build:pester, build:java-sign]

@@ -79,6 +79,16 @@ stages:
             DOCKER_PASSWORD: $(DOCKER_PASSWORD) # requires explicit mapping to be used as an env var
 
         - task: Bash@3
+          displayName: Build java-sign
+          inputs:
+            targetType: inline
+            script: |
+              taskctl build:java-sign
+          env:
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD) # requires explicit mapping to be used as an env var
+
+
+        - task: Bash@3
           displayName: Publish to Dashboard
           inputs:
             targetType: inline
