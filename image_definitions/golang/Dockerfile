@@ -1,4 +1,4 @@
-FROM golang:1.17
+FROM golang:1.16.11
 
 ARG POWERSHELL_VERSION=7.2.1
 
