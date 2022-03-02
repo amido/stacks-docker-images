@@ -19,6 +19,7 @@ RUN apt-get update && \
         libxrender1 \
         libxtst6 \
         libfontconfig1 \
+        unzip \
         curl
 
 RUN curl "https://cdn.azul.com/zulu/bin/zulu11.52.13-ca-jdk${JAVA_VERSION}-linux_amd64.deb" -o /tmp/java.deb && \
@@ -34,5 +35,5 @@ RUN curl "https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apach
 ENV PATH="/usr/local/apache-maven-${MAVEN_VERSION}/bin:$PATH"
 
 # Remove uncessary packages
-RUN apt-get -y remove curl && \
+RUN apt-get -y remove curl unzip && \
     apt-get -y autoremove
