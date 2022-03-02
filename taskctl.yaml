@@ -29,7 +29,7 @@ pipelines:
   - task: build:container
     variables:
       IMAGE_NAME: amidostacks/runner-pwsh-python
-      DOCKERFILE: ./image_definitions/pester
+      DOCKERFILE: ./image_definitions/python
 
   build:golang:
   - task: build:container
