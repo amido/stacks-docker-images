@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/powershell:7.2.1-ubuntu-20.04
 
 ARG PWSH_VERSION=7.2.1
 ARG TERRAFORM_VERSION=1.1.3
-ARG AMIDOBUILD=v0.0.82
+ARG AMIDOBUILD=v0.0.94
 ARG TASKCTL_VERSION=1.4.2
 
 ENV TZ="Europe/London"
@@ -20,6 +20,11 @@ RUN apt-get update && \
         apt-transport-https \
         ca-certificates \
         git
+
+# Install KubeCTL
+RUN curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list && \
+    apt-get update && apt-get install -y kubectl
 
 # Install Docker
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
