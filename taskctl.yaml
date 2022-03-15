@@ -22,7 +22,7 @@ pipelines:
   build:java:
   - task: build:container
     variables:
-      IMAGE_NAME: amidostacks/runner-pwsh-java
+      IMAGE_NAME: samandimed/runner-pwsh-java
       DOCKERFILE: ./image_definitions/java
 
   build:python:

@@ -4,7 +4,7 @@
 FROM amidostacks/runner-pwsh
 
 ARG JAVA_VERSION=11.0.13
-ARG MAVEN_VERSION=3.8.4
+ARG MAVEN_VERSION=3.8.5
 
 
 # Install dependencies
@@ -20,7 +20,10 @@ RUN apt-get update && \
         libxtst6 \
         libfontconfig1 \
         unzip \
-        curl
+        curl \
+        gnupg \
+        gnupg-agent \
+        git-all
 
 RUN curl "https://cdn.azul.com/zulu/bin/zulu11.52.13-ca-jdk${JAVA_VERSION}-linux_amd64.deb" -o /tmp/java.deb && \
     dpkg -i /tmp/java.deb && \
