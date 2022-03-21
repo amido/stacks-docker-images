@@ -22,4 +22,9 @@ contexts:
         - -NoProfile
         - -Command
     quote: "'"
-    before: env | grep -v PATH | grep -v SOURCEVERSIONMESSAGE | grep -v HOME > envfile
+    before: |
+      >.envfile
+      for var in $(env | grep -v PATH | grep -Ev '^(BASH)'); do
+      var_fixed=$(printf "%s" "${!var}" | tr -d '\n' )
+      echo "$var=${var_fixed}" >>.envfile
+      done
