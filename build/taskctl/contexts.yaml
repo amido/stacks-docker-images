@@ -23,8 +23,7 @@ contexts:
         - -Command
     quote: "'"
     before: |
-      >envfile
       for var in $(env | grep -v PATH | grep -Ev '^(BASH)'); do
       var_fixed=$(printf "%s" "${!var}" | tr -d '\n' )
-      echo "$var=${var_fixed}" >>.envfile
+      echo "$var=${var_fixed}" >>envfile
       done
