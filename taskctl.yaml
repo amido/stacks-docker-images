@@ -41,7 +41,13 @@ pipelines:
   - task: build:container
     variables:
       IMAGE_NAME: amidostacks/runner-pwsh-asciidoctor
-      DOCKERFILE: ./image_definitions/asciidoctor    
+      DOCKERFILE: ./image_definitions/asciidoctor
+
+  build:azcli:
+  - task: build:container
+    variables:
+      IMAGE_NAME: amidostacks/runner-pwsh-azcli
+      DOCKERFILE: ./image_definitions/azcli
 
   publish:
   - task: update:dashboard
@@ -59,6 +65,8 @@ pipelines:
   - pipeline: build:golang
     depends_on: [build:base]
   - pipeline: build:asciidoctor
+    depends_on: [build:base]
+  - pipeline: build:azcli
     depends_on: [build:base]
   - pipeline: publish
     depends_on: [build:base, build:dotnet, build:java, build:python, build:golang, build:asciidoctor]

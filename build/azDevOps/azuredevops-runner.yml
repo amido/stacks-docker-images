@@ -33,7 +33,7 @@ stages:
             targetType: inline
             script: |
               wget https://github.com/taskctl/taskctl/releases/download/${{ variables.TaskctlVersion }}/taskctl_${{ variables.TaskctlVersion }}_linux_amd64.tar.gz -O /tmp/taskctl.tar.gz
-              tar zxf /tmp/taskctl.tar.gz -C /usr/local/bin taskctl 
+              tar zxf /tmp/taskctl.tar.gz -C /usr/local/bin taskctl
 
         - task: Bash@3
           displayName: Setup
@@ -93,6 +93,15 @@ stages:
             targetType: inline
             script: |
               taskctl build:asciidoctor
+          env:
+            DOCKER_PASSWORD: $(DOCKER_PASSWORD) # requires explicit mapping to be used as an env var
+
+        - task: Bash@3
+          displayName: Build AzCLI
+          inputs:
+            targetType: inline
+            script: |
+              taskctl build:azcli
           env:
             DOCKER_PASSWORD: $(DOCKER_PASSWORD) # requires explicit mapping to be used as an env var
 
