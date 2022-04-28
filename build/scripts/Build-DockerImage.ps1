@@ -93,8 +93,8 @@ function Build-DockerImage() {
 
     # Ensure that the name and the tagare lowercase so that Docker does not 
     # throw an error with invalid strings
-    $name = $name.ToLower()
-    $tag = $tag.ToLower()
+    #$name = $name.ToLower()
+    #$tag = $tag.ToLower()
 
     # Create an array to store the arguments to pass to docker
     $arguments = @()
