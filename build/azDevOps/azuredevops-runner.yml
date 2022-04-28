@@ -40,7 +40,8 @@ stages:
           inputs:
             targetType: inline
             script: |
-              env
+              env | grep -v PATH | grep -v SOURCEVERSIONMESSAGE | grep -v HOME > envfile
+              cat envfile
               taskctl setup
 
         - task: Bash@3
