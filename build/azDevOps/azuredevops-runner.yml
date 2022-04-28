@@ -40,8 +40,6 @@ stages:
           inputs:
             targetType: inline
             script: |
-              env | grep -v PATH | grep -v HOME | while IFS='=' read -r n v; do echo "$n=${v//[$'\n']}"; done > envfile
-              cat envfile
               taskctl setup
 
         - task: Bash@3
