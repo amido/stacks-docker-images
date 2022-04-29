@@ -111,6 +111,8 @@ function Build-DockerImage() {
     $cmd = "docker build {0}" -f ($arguments -Join " ")
 
     write-host $cmd
+
+    return
     
     Invoke-External -Command $cmd
 
