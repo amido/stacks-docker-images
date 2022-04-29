@@ -22,4 +22,4 @@ contexts:
         - -NoProfile
         - -Command
     quote: "'"
-    before: env | grep -v HOME | grep -v PATH > envfile
+    before: envfile -e home,path
