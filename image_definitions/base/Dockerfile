@@ -51,9 +51,9 @@ RUN curl -L "https://github.com/taskctl/taskctl/releases/download/${TASKCTL_VERS
 RUN pwsh -NoProfile -Command "Install-Module -Name Az -Scope AllUsers -Repository PSGallery -Force"
 
 # Install AWSCLI
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    unzip awscliv2.zip \
-    ./aws/install \
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
     rm awscliv2.zip
 
 # Install Pester for Unit testing
