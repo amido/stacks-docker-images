@@ -15,6 +15,9 @@ ARG TOOLPATH="/usr/local/dotnet"
 # Upate the PATH environment variable so that the tool can be found
 ENV PATH="${TOOLPATH}:${PATH}"
 
+# Update the DOTNET_ROOT env var so that dotnet-sonarscanner can find it
+ENV DOTNET_ROOT=/usr/bin
+
 RUN apt-get update && apt-get -y install curl
 
 # Install the dotnet framework
