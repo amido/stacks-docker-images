@@ -9,11 +9,14 @@ FROM amidostacks/runner-pwsh
 
 ARG SONARSCANNER_VERSION=5.4.1
 ARG REPORTGENERATOR_VERSION=5.0.2
-ARG DOTNET_VERSION=6.0.200
+ARG DOTNET_VERSION=6.0.300
 ARG TOOLPATH="/usr/local/dotnet"
 
 # Upate the PATH environment variable so that the tool can be found
 ENV PATH="${TOOLPATH}:${PATH}"
+
+# Update the DOTNET_ROOT env var so that dotnet-sonarscanner can find it
+ENV DOTNET_ROOT=/usr/bin
 
 RUN apt-get update && apt-get -y install curl
 
