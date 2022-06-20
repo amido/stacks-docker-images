@@ -16,11 +16,10 @@ variables:
 
   # Determine the "stability" of the image
   - name: stability
-    value:
-      ${{ if eq(Build.SourceBranchName, 'main') }}:
-        value: stable
-      ${{ else }}:
-        value: unstable
+    ${{ if eq(Build.SourceBranchName, 'main') }}:
+      value: stable
+    ${{ else }}:
+      value: unstable
 
   # Versioning
   - name: version_major
