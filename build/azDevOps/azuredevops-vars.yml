@@ -14,14 +14,9 @@ variables:
   - name: pool_vm_image
     value: ubuntu-20.04
 
-  - name: stage_branches
-    value:
-      - main
-      - master
-
   # Determine the "stability" of the image
   - name: stability
-    ${{ if containsValue(parameters.stage_branches, parameters.Build.SourceBranchName)}}:
+    ${{ if or(eq(parameters.Build.SourceBranchName, 'master'), eq(parameters.Build.SourceBranchName, 'main'))}}:
       value: stable
     ${{ else }}:
       value: unstable
