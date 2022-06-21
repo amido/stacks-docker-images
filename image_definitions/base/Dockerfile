@@ -68,7 +68,7 @@ RUN pwsh -NoProfile -Command "Install-Module -Name Powershell-Yaml -Scope AllUse
 
 # Install Inspec for infrastructure testing
 RUN curl "https://omnitruck.chef.io/install.sh" -o "install.sh" && \
-    bash -s ./install.sh -P inspec -v ${INSPEC_VERSION} && \
+    bash ./install.sh -P inspec -v ${INSPEC_VERSION} && \
     rm install.sh
 
 # Remove uncessary packages
