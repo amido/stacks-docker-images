@@ -1,6 +1,5 @@
-FROM mcr.microsoft.com/powershell:7.2.1-ubuntu-20.04
+FROM mcr.microsoft.com/powershell:7.2-ubuntu-20.04
 
-ARG PWSH_VERSION=7.2.1
 ARG TERRAFORM_VERSION=1.1.3
 ARG AMIDOBUILD=v0.0.168
 ARG TASKCTL_VERSION=1.4.2
